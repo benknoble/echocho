@@ -31,3 +31,6 @@ provided for the implementations listed below.
  - No `make(1)` support for installation, out-of-source building, documentation
  - No tests
  - No documentation
+
+If you find a bug, particularly in the implementation of the POSIX standard,
+please file an issue.
