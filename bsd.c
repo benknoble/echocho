@@ -3,9 +3,8 @@
 #include <string.h>
 
 int main(int argc, char** argv) {
-    if (argc == 1) return 0;
     int err;
-    if (strcmp(argv[1], "-n") == 0) {
+    if (argc > 1 && strcmp(argv[1], "-n") == 0) {
         // swallow the -n
         err = echo_n(argc-2, &argv[2]);
     } else {
