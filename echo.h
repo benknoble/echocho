@@ -3,6 +3,5 @@
 
 int echo(int argc, char **argv);
 int echo_n(int argc, char **argv);
-int interpret_escapes(int argc, char **argv);
 
 #endif
