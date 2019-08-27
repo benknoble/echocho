@@ -92,18 +92,7 @@ static int escape(char *str, bool *suppress_newline) {
             case '0':
                 while (char_isdigit(str[ESC_CHAR_POS + num_digits])) {
                     octal *= 8;
-                    switch(str[ESC_CHAR_POS + num_digits]) {
-                        case '0': octal += 0; break;
-                        case '1': octal += 1; break;
-                        case '2': octal += 2; break;
-                        case '3': octal += 3; break;
-                        case '4': octal += 4; break;
-                        case '5': octal += 5; break;
-                        case '6': octal += 6; break;
-                        case '7': octal += 7; break;
-                        case '8': octal += 8; break;
-                        case '9': octal += 9; break;
-                    }
+                    octal += str[ESC_CHAR_POS + num_digits] - '0';
                     if (num_digits == MAX_OCTAL) break;
                     ++num_digits;
                 }
