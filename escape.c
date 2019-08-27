@@ -50,7 +50,7 @@ static int escape(char *str, bool *suppress_newline) {
                 *suppress_newline = true;
                 // clear out this arg
                 str[START] = '\0';
-                ++escapes_handled;
+                return ++escapes_handled;
                 break;
             case 'f':
                 str[START] = FORMFEED;
