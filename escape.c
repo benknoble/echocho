@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <string.h>
 
-void shift_left_one_char(char *str) {
+static void shift_left_one_char(char *str) {
     for (int i = 0; str[i] != '\0'; ++i) {
         str[i] = str[i+1];
     }
@@ -27,7 +27,7 @@ static bool char_isdigit(char c) { return isdigit((unsigned char)c); }
 #define ESC_CHAR_POS 1
 #define ESC_MIN_LEN 2
 
-int escape(char *str, bool *suppress_newline) {
+static int escape(char *str, bool *suppress_newline) {
     int escapes_handled = 0;
     while ((str = strchr(str, BACKSLASH)) != NULL) {
         if (strnlen(str, ESC_MIN_LEN) < ESC_MIN_LEN) break;

@@ -1,7 +1,7 @@
 #include "echo.h"
 #include <stdio.h>
 
-int print_args(int argc, char **argv) {
+static int print_args(int argc, char **argv) {
     if (argc == 0) return 0;
     int err = 0;
     for (int i = 0; i < argc-1; ++i) {
