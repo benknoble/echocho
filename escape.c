@@ -21,7 +21,7 @@ static bool char_isdigit(char c) { return isdigit((unsigned char)c); }
 #define VTAB '\v'
 #define BACKSLASH '\\'
 
-#define MAX_OCTAL 3
+#define MAX_OCTAL 4
 
 #define START 0
 #define ESC_CHAR_POS 1
@@ -90,15 +90,15 @@ static int escape(char *str, bool *suppress_newline) {
                 ++escapes_handled;
                 break;
             case '0':
-                while (char_isdigit(str[ESC_CHAR_POS + num_digits])) {
+                while (char_isdigit(str[ESC_CHAR_POS + num_digits])
+                        && num_digits < MAX_OCTAL) {
                     octal *= 8;
                     octal += str[ESC_CHAR_POS + num_digits] - '0';
-                    if (num_digits == MAX_OCTAL) break;
                     ++num_digits;
                 }
                 str[START] = (char)octal;
                 ++str;
-                for (int i = 0; i < ESC_CHAR_POS + num_digits; ++i)
+                for (int i = 0; i < num_digits; ++i)
                 { shift_left_one_char(str); }
                 ++escapes_handled;
                 break;
