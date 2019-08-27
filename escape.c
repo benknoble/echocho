@@ -10,6 +10,8 @@ void shift_left_one_char(char *str) {
     }
 }
 
+static bool char_isdigit(char c) { return isdigit((unsigned char)c); }
+
 #define ALERT '\a'
 #define BACKSPACE '\b'
 #define FORMFEED '\f'
@@ -88,7 +90,7 @@ int escape(char *str, bool *suppress_newline) {
                 ++escapes_handled;
                 break;
             case '0':
-                while (isdigit(str[ESC_CHAR_POS + num_digits])) {
+                while (char_isdigit(str[ESC_CHAR_POS + num_digits])) {
                     octal *= 8;
                     switch(str[ESC_CHAR_POS + num_digits]) {
                         case '0': octal += 0; break;
