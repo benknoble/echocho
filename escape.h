@@ -1,8 +1,6 @@
 #ifndef ESCAPE_H
 #define ESCAPE_H
 
-#include <stdbool.h>
-
-int interpret_escapes(int argc, char **argv, bool *suppress_newline);
+int echo_e(int argc, char **argv);
 
 #endif

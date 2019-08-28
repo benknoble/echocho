@@ -1,7 +1,9 @@
 #include "escape.h"
+#include "echo.h"
 #include <ctype.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
 
 static void shift_left_one_char(char *str) {
@@ -109,7 +111,7 @@ static int escape(char *str, bool *suppress_newline) {
     return escapes_handled;
 }
 
-int interpret_escapes(int argc, char **argv, bool *suppress_newline) {
+static int interpret_escapes(int argc, char **argv, bool *suppress_newline) {
     *suppress_newline = false;
     for (int i = 0; i < argc; ++i) {
         int err = escape(argv[i], suppress_newline);
@@ -117,4 +119,16 @@ int interpret_escapes(int argc, char **argv, bool *suppress_newline) {
         if (*suppress_newline) return i+1;
     }
     return argc;
+}
+
+int echo_e(int argc, char **argv) {
+    if (argc <= 0) return EXIT_SUCCESS;
+    bool suppress_newline;
+    argc = interpret_escapes(argc, argv, &suppress_newline);
+    if (argc < 0) return EXIT_FAILURE;
+    if (suppress_newline) {
+        return echo_n(argc, argv);
+    } else {
+        return echo(argc, argv);
+    }
 }
