@@ -1,27 +1,12 @@
 #include "echo.h"
-#include <stdio.h>
+#include "echo_n.h"
 #include <stdlib.h>
-
-static int print_args(int argc, char **argv) {
-    if (argc == 0) return 0;
-    int err = 0;
-    for (int i = 0; i < argc-1; ++i) {
-        err = printf("%s ", argv[i]);
-        if (err < 0) return EXIT_FAILURE;
-    }
-    err = printf("%s", argv[argc-1]);
-    if (err < 0) return EXIT_FAILURE;
-    return EXIT_SUCCESS;
-}
+#include <stdio.h>
 
 int echo(int argc, char **argv) {
-    int err = print_args(argc, argv);
-    if (err < 0) return EXIT_FAILURE;
-    err = printf("\n");
+    int ret = echo_n(argc, argv);
+    if (ret == EXIT_FAILURE) return EXIT_FAILURE;
+    int err = printf("\n");
     if (err < 0) return EXIT_FAILURE;
     return EXIT_SUCCESS;
-}
-
-int echo_n(int argc, char **argv) {
-    return print_args(argc, argv);
 }
