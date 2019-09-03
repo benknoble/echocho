@@ -73,7 +73,7 @@ static int escape_c(char *str, char *c, bool *slash_c_seen) {
 
 static int print_one_at_a_time(int argc, char **argv) {
     int err;
-    bool finish;
+    bool finish = false;
     for (int i = 0; i < argc; ++i) {
         int j = 0;
         char c;
