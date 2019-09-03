@@ -26,6 +26,8 @@ static int escape_c(char *str, char *c, bool *slash_c_seen) {
     int octal = 0;
     *slash_c_seen = false;
     switch (str[ESC_CHAR_POS]) {
+        case NULL_ZERO:
+            return 0;
         case 'a':
             *c = ALERT;
             return 1;
