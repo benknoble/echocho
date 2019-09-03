@@ -10,10 +10,10 @@ binaries = bsd posix sysv xsi
 
 all: $(binaries)
 
-$(binaries): echo.o
+bsd posix: echo.o
 sysv xsi: escape.o
 
-bsd.o posix.o sysv.o xsi.o echo.o: echo.h
+bsd.o posix.o echo.o: echo.h
 sysv.o xsi.o escape.o: escape.h
 
 clean:
