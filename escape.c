@@ -71,22 +71,30 @@ static int escape_c(char *str, char *c, bool *slash_c_seen) {
     }
 }
 
+static int print_arg(char *argv_i, bool *finish) {
+    int j = 0;
+    char c;
+    int err;
+    while ((c = argv_i[j++]) != NULL_ZERO) {
+        if (c == BACKSLASH) {
+            int consumed = escape_c(&argv_i[j], &c, finish);
+            if (*finish) return EXIT_SUCCESS;
+            if (consumed < 0) return EXIT_FAILURE;
+            j += consumed;
+        }
+        err = putchar(c);
+        if (err == EOF) return EXIT_FAILURE;
+    }
+    return EXIT_SUCCESS;
+}
+
 static int print_one_at_a_time(int argc, char **argv) {
     int err;
     bool finish = false;
     for (int i = 0; i < argc; ++i) {
-        int j = 0;
-        char c;
-        while ((c = argv[i][j++]) != NULL_ZERO) {
-            if (c == BACKSLASH) {
-                int consumed = escape_c(&argv[i][j], &c, &finish);
-                if (finish) return EXIT_SUCCESS;
-                if (consumed < 0) return EXIT_FAILURE;
-                j += consumed;
-            }
-            err = putchar(c);
-            if (err == EOF) return EXIT_FAILURE;
-        }
+        err = print_arg(argv[i], &finish);
+        if (finish) return EXIT_SUCCESS;
+        if (err == EXIT_FAILURE) return err;
         // no space after the very last argument
         if (i < argc-1) {
             err = putchar(' ');
