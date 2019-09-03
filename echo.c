@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 static int print_args(int argc, char **argv) {
-    if (argc == 0) return 0;
+    if (argc <= 0) return 0;
     int err = 0;
     for (int i = 0; i < argc-1; ++i) {
         err = printf("%s ", argv[i]);
