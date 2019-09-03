@@ -16,9 +16,9 @@ static int print_args(int argc, char **argv) {
 
 int echo(int argc, char **argv) {
     int err = print_args(argc, argv);
-    if (err < 0) return EXIT_FAILURE;
+    if (err == EXIT_FAILURE) return err;
     err = printf("\n");
-    if (err < 0) return EXIT_FAILURE;
+    if (err == EXIT_FAILURE) return err;
     return EXIT_SUCCESS;
 }
 
