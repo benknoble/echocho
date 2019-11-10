@@ -5,7 +5,7 @@ SHELL = /bin/sh
 .SUFFIXES:
 .SUFFIXES: .c .o
 
-objects = bsd.o posix.o sysv.o xsi.o echo.o escape.o
+objects = echo.o escape.o
 binaries = bsd posix sysv xsi
 
 all: $(binaries)
@@ -13,8 +13,8 @@ all: $(binaries)
 bsd posix: echo.o
 sysv xsi: escape.o
 
-bsd.o posix.o echo.o: echo.h
-sysv.o xsi.o escape.o: escape.h
+echo.o: echo.h
+escape.o: escape.h
 
 clean:
 	-$(RM) $(binaries) $(objects)
