@@ -18,7 +18,7 @@ int echo(int argc, char **argv) {
     int err = print_args(argc, argv);
     if (err == EXIT_FAILURE) return err;
     err = printf("\n");
-    if (err == EXIT_FAILURE) return err;
+    if (err < 0) return err;
     return EXIT_SUCCESS;
 }
 
